@@ -106,6 +106,7 @@ struct Heaps{
         if (heavy == heavy_par){
             tree[k].par = tree[par].par;
             update_grandparent(tree[par].par , par , k);
+            update_par(par , k);
             if (heavy == 1) {
                 update_par(tree[k].left , par);
                 tree[par].right = tree[k].left;
@@ -126,7 +127,9 @@ struct Heaps{
                 int x = tree[k].left;
                 update_grandparent(tree[par].par , par , x);
                 update_par(k , x);
+                update_par(par , x);
                 tree[x].par = tree[par].par;
+                
                 
                 tree[k].left = tree[x].right , tree[par].right = tree[x].left ;
                 update_par(tree[x].right , k);
@@ -144,6 +147,7 @@ struct Heaps{
                 int x = tree[k].right;
                 update_grandparent(tree[par].par , par , x);
                 update_par(k , x);
+                update_par(par , x);
                 tree[x].par = tree[par].par;
                 
                 tree[par].left = tree[x].right , tree[k].right = tree[x].left ;
