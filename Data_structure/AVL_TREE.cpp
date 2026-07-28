@@ -128,8 +128,8 @@ struct Heaps{
                 update_par(k , x);
                 tree[x].par = tree[par].par;
                 
-                if (tree[x].right == -1) tree[k].left = -1 , tree[par].right = tree[x].left; 
-                    else tree[k].left = tree[x].right , tree[par].right = -1;
+                if (tree[x].right == -1) tree[k].left = -1 , tree[par].right = tree[x].left , update_par(tree[x].left , par);
+                    else tree[k].left = tree[x].right , tree[par].right = -1 , update_par(tree[x].right , k);
 
                 tree[x].left = par , tree[x].right = k;
 
@@ -145,8 +145,8 @@ struct Heaps{
                 update_par(k , x);
                 tree[x].par = tree[par].par;
                 
-                if (tree[x].right == -1) tree[k].right = tree[x].left , tree[par].left = -1; 
-                    else tree[par].left = tree[x].right , tree[k].right = -1;
+                if (tree[x].right == -1) tree[k].right = tree[x].left , tree[par].left = -1 , update_par(tree[x].left , k);
+                    else tree[par].left = tree[x].right , tree[k].right = -1 , update_par(tree[x].right , par);
 
                 tree[x].left = k , tree[x].right = par;
 
@@ -187,8 +187,5 @@ int main(){
         // cout << "TURN : " << i << '\n';
         heap.print(heap.root);
     }
-    
-    
-
     return 0;
 }
